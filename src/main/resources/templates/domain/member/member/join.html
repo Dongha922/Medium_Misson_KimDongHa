@@ -1,15 +1,46 @@
 <html layout:decorate="~{global/usrlayout}">
 <div layout:fragment="content" >
     <h1>회원가입</h1>
+    <script>
+        function submitJoinForm(form){
+            form.username.value = form.username.value.trim();
 
-    <form th:action  method="POST" onsubmit="return false;">
+            if(form.username.value.length ==0){
+                alert('사용자 ID를 입력해주세요.');
+                form.username.focus();
+                return; //더이상 진행 안함 => 실패
+            }
+            form.password.value = form.password.value.trim();
+
+            if(form.password.value.length ==0){
+                alert('비밀번호를 입력해주세요');
+                form.password.focus();
+                return; //더이상 진행 안함 => 실패
+            }
+            form.passwordConfirm.value = form.passwordConfirm.value.trim();
+
+            if(form.passwordConfirm.value.length ==0){
+                alert('비밀번호확인을 해주세요');
+                form.passwordConfirm.focus();
+                return; //더이상 진행 안함 => 실패
+            }
+            if(form.password.value != form.passwordConfirm.value){
+                alert('비밀번호가 일치하지 않습니다.');
+                form.passwordConfirm.focus();
+                return; //더이상 진행 안함 => 실패
+            }
+
+            form.submit();
+        }
+    </script>
+    <form th:action  method="POST" onsubmit="submitJoinForm(this); return false;">
         <div>
             <label >사용자ID</label>
-            <input type="text" name ="username" required >
+            <input type="text" name ="username" required  >
         </div>
         <div>
             <label >비밀번호</label>
-            <input type="password" name ="password" required>
+            <input type="password" name ="password" required >
         </div>
         <div>
             <label >비밀번호 확인</label>
