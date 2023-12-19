@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    @Transactional
+    @Transactional //하나의 트랜잭션안에 묶임.
     public Member join(String username, String password) {
         Member member = new Member(username, password);
         memberRepository.save(member);
